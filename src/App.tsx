@@ -6,6 +6,8 @@ import Loading from './components/loading/Loading'
 import PokemonDetails from './components/pokemon-details/PokemonDetails'
 import Search from './components/search/Search'
 
+import useNetwork from './hooks/use-network/use-network'
+
 import css from './App.module.scss'
 
 type PokemonDataType = {
@@ -17,6 +19,7 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [pokemonData, setPokemonData] = useState([])
   const [search, setSearch] = useState('')
+  const isOnline = useNetwork()
 
   useEffect(() => {
     // GET request using fetch inside useEffect React hook
@@ -34,8 +37,22 @@ function App() {
     setSearch(event.target.value)
   }
 
-  if (loading) return <Loading />
+  // loading state
+  if (loading) return (
+    <div className={css.loading}>
+      <Loading />
+    </div>
+  )
 
+  // if app is offline
+  if (!isOnline) return (
+    <div className={css.offline}>
+      <Loading />
+      <p>Oops, it seems you are offline :(</p>
+    </div>
+  )
+
+  // default
   return (
     <>
       <h4 className={css.title}>Pokédex (Kanto - カントー地方)</h4>
