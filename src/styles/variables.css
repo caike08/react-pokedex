@@ -1,0 +1,52 @@
+:root{
+  --box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.06), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 0px 1px rgba(0, 0, 0, 0.12);
+  --box-shadow-hover: 0px 64px 167px rgba(0, 0, 0, 0.0487776), 0px 19.2941px 50.3456px rgba(0, 0, 0, 0.07), 0px 8.01379px 20.911px rgba(0, 0, 0, 0.0912224), 0px 2.89843px 7.5631px rgba(0, 0, 0, 0.14);
+  --border-radius: 8px;
+  --border-radius-button: 2px;
+  --color-primary: #213547;
+  --color-background: #ffffff;
+  --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --space-10: 60px;
+  --space-9: 48px;
+  --space-8: 36px;
+  --space-7: 30px;
+  --space-6: 24px;
+  --space-5: 18px;
+  --space-4: 12px;
+  --space-3: 9px;
+  --space-2: 6px;
+  --space-1: 3px;
+  --font-size-h1: 50px;
+  --font-style-h1: normal;
+  --font-weight-h1: 500;
+  --line-height-h1: normal;
+  --font-size-h2: 38px;
+  --font-style-h2: normal;
+  --font-weight-h2: 400;
+  --line-height-h2: normal;
+  --font-size-h3: 28px;
+  --font-style-h3: normal;
+  --font-weight-h3: 400;
+  --line-height-h3: normal;
+  --font-size-h4: 21px;
+  --font-style-h4: normal;
+  --font-weight-h4: 400;
+  --line-height-h4: normal;
+  --font-size-h5: 12px;
+  --font-style-h5: normal;
+  --font-weight-h5: 500;
+  --line-height-h5: normal;
+  --font-size-paragraph: 16px;
+  --font-style-paragraph: normal;
+  --font-weight-paragraph: 400;
+  --line-height-paragraph: normal;
+  --font-size-small: 12px;
+  --font-style-small: normal;
+  --font-weight-small: 400;
+  --line-height-small: normal;
+}
+
+[data-theme='dark'] {
+  --color-primary: rgba(255, 255, 255, 0.87);
+  --color-background: #242424;
+}

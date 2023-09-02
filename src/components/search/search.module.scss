@@ -1,0 +1,13 @@
+.search {
+  flex: 1;
+	display: flex;
+	box-sizing: border-box;
+	min-width: 0;
+  height: 36px;
+	outline: none;
+  padding: var(--space-3);
+  border: 1px solid var(--color-primary);
+  background-color: var(--color-background);
+  border-radius: var(--border-radius);
+  color: var(--color-primary);
+}
