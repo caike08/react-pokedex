@@ -37,6 +37,19 @@ function App() {
     setSearch(event.target.value)
   }
 
+  const filteredList = pokemonData
+    .filter((pokemon: PokemonDataType) => pokemon.name.includes(search.toLowerCase()))
+    .map((pokemon: PokemonDataType, index) => (
+      <Dialog key={index} content={<PokemonDetails name={pokemon.name} url={pokemon.url} />}>
+        <Card
+          id={index + 1}
+          name={pokemon.name}
+          url={pokemon.url}
+        />
+      </Dialog>
+    ))
+
+
   // loading state
   if (loading) return (
     <div className={css.loading}>
@@ -58,29 +71,22 @@ function App() {
       <h4 className={css.title}>Pokédex (Kanto - カントー地方)</h4>
 
       <div className={css.content}>
-        {pokemonData.length > 0
+        {pokemonData.length
           ? (
             <>
               <Search onChange={onSearchChange} className={css.search} />
 
-              <div className={css.list}>
-                {pokemonData
-                  .filter((pokemon: PokemonDataType) => pokemon.name.includes(search.toLowerCase()))
-                  .map((pokemon: PokemonDataType, index) => (
-                    <Dialog key={index} content={<PokemonDetails name={pokemon.name} url={pokemon.url} />}>
-                      <Card
-                        id={index + 1}
-                        name={pokemon.name}
-                        url={pokemon.url}
-                      />
-                    </Dialog>
-                  ))
-                }
-              </div>
+              {filteredList.length ? (
+                <div className={css.list}>
+                  {filteredList}
+                </div>
+              ) : (
+                <h5 className={css.noPokemon}>No pokémon found :(</h5>
+              )}
             </>
           )
-          : <h5 className={css.noPokemon}>No pokémon found</h5>
-          }
+          : <h5 className={css.noPokemon}>Your pokemon list is empty :(</h5>
+        }
       </div>
 
     </>
