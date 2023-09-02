@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 
+import ImageResolver from '../image-resolver/ImageResolver'
 import Loading from '../loading/Loading'
 
 import css from './card.module.scss'
@@ -39,7 +40,7 @@ function Card({id, name, url}: CardProps) {
       ? <Loading />
       : (
         <>      
-          <img className={css.pokemon} src={front_default} alt={name} />
+          <ImageResolver className={css.pokemon} src={front_default} alt={name} />
           <small className={css.name}>#{id} {name}</small>
         </>
       )

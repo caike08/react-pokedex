@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 
+import ImageResolver from '../image-resolver/ImageResolver'
 import Loading from '../loading/Loading'
 
 import css from './pokemon-details.module.scss'
@@ -69,10 +70,7 @@ function PokemonDetails({ name, url }: PokemonDetailsType) {
       <h4 className={css.title}>{name}</h4>
 
       <div className={css.imageContainer}>
-        {sprites.front_default.length > 0
-          ? <img src={sprites.front_default} alt={name} />
-          : <Loading />
-        }
+        <ImageResolver className={css.pokemon} src={sprites.front_default} alt={name} />
       </div>
 
       <div className={css.row}>
