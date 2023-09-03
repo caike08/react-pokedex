@@ -3,6 +3,7 @@
   --box-shadow-hover: 0px 64px 167px rgba(0, 0, 0, 0.0487776), 0px 19.2941px 50.3456px rgba(0, 0, 0, 0.07), 0px 8.01379px 20.911px rgba(0, 0, 0, 0.0912224), 0px 2.89843px 7.5631px rgba(0, 0, 0, 0.14);
   --border-radius: 8px;
   --border-radius-button: 2px;
+  --border-radius-full: 100%;
   --color-primary: #213547;
   --color-background: #ffffff;
   --font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -44,6 +45,24 @@
   --font-style-small: normal;
   --font-weight-small: 400;
   --line-height-small: normal;
+  --pokemon-type-badge-grass: #5FBD58;
+  --pokemon-type-badge-poison: #FA8581;
+  --pokemon-type-badge-fire: #FBA54C;
+  --pokemon-type-badge-water: #7FC6FF;
+  --pokemon-type-badge-bug: #A6B91A;
+  --pokemon-type-badge-normal: #A8A77A;
+  --pokemon-type-badge-flying: #A98FF3;
+  --pokemon-type-badge-electric: #F9CF30;
+  --pokemon-type-badge-ice: #96D9D6;
+  --pokemon-type-badge-ground: #E2BF65;
+  --pokemon-type-badge-fighting: #C22E28;
+  --pokemon-type-badge-psychic: #FA8581;
+  --pokemon-type-badge-rock: #B6A136;
+  --pokemon-type-badge-ghost: #735797;
+  --pokemon-type-badge-dragon: #6F35FC;
+  --pokemon-type-badge-dark: #705746;
+  --pokemon-type-badge-steel: #B7B7CE;
+  --pokemon-type-badge-fairy: #D685AD;
 }
 
 [data-theme='dark'] {

@@ -1,0 +1,13 @@
+@use '../../styles/typography.scss' as *;
+
+.trigger {
+  cursor: help;
+}
+
+.tooltip {
+  @include paragraph-small;
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: var(--border-radius);
+  padding: var(--space-2);
+}

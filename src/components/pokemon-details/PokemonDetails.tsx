@@ -1,7 +1,9 @@
 import {useEffect, useState} from 'react'
 
+import { POKEMON_TYPES } from '../../constants/pokemon-types.const'
 import ImageResolver from '../image-resolver/ImageResolver'
 import Loading from '../loading/Loading'
+import PokemonTypeBadge from '../pokemon-type-badge/PokemonTypeBadge'
 
 import css from './pokemon-details.module.scss'
 
@@ -22,7 +24,7 @@ type PokemonDetailType = {
   types: Array<{
     slot: number,
     type: {
-      name: string
+      name: POKEMON_TYPES
     }
   }>,
   sprites: {
@@ -109,11 +111,11 @@ function PokemonDetails({ name, url }: PokemonDetailsType) {
         {types.length > 0 && (
           <div className={css.cell}>
             <h5 className={css.subtitle}>Type</h5>
-            <ul>
+            <div className={css.badges}>
               {types.map((type, index) => (
-                <li key={index} className={css.description}>{type.type.name}</li>
+                <PokemonTypeBadge key={index} badge={type.type.name} />
               ))}
-            </ul>
+            </div>
           </div>
         )}
       </div>

@@ -1,0 +1,34 @@
+$pokemon-type: (
+	'grass': var(--pokemon-type-badge-grass),
+  'poison': var(--pokemon-type-badge-poison),
+  'fire': var(--pokemon-type-badge-fire),
+  'water': var(--pokemon-type-badge-water),
+  'bug': var(--pokemon-type-badge-bug),
+  'normal': var(--pokemon-type-badge-normal),
+  'flying': var(--pokemon-type-badge-flying),
+  'electric': var(--pokemon-type-badge-electric),
+  'ice': var(--pokemon-type-badge-ice),
+  'ground': var(--pokemon-type-badge-ground),
+  'fighting': var(--pokemon-type-badge-fighting),
+  'psychic': var(--pokemon-type-badge-psychic),
+  'rock': var(--pokemon-type-badge-rock),
+  'ghost': var(--pokemon-type-badge-ghost),
+  'dragon': var(--pokemon-type-badge-dragon),
+  'dark': var(--pokemon-type-badge-dark),
+  'steel': var(--pokemon-type-badge-steel),
+  'fairy': var(--pokemon-type-badge-fairy),
+);
+
+.badge {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--border-radius-full);
+  object-fit: contain;
+  padding: var(--space-2);
+
+  @each $key, $value in $pokemon-type {
+    &.#{$key} {
+      background-color: $value;
+    }
+  }
+}

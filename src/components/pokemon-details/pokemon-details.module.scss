@@ -43,3 +43,11 @@
   height: 96px;
   image-rendering: pixelated;
 }
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  justify-content: center;
+  align-items: center;
+}

@@ -18,6 +18,7 @@ type DialogProps = {
   content: React.ReactNode
 }
 
+// based on https://floating-ui.com/docs/dialog
 function Dialog({ children, content }: DialogProps) {
   const [isOpen, setIsOpen] = useState(false)
 
