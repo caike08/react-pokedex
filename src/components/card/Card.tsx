@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react'
-
 import ImageResolver from '../image-resolver/ImageResolver'
 import Loading from '../loading/Loading'
 
 import css from './card.module.scss'
+import useFetch from '../../hooks/use-fetch/use-fetch'
 
 type CardProps = {
   id: string | number,
@@ -18,22 +17,12 @@ type PokemonDataType = {
 }
 
 function Card({id, name, url}: CardProps) {
-  const [loading, setLoading] = useState(true)
-  const [pokemonData, setPokemonData] = useState<PokemonDataType>({ sprites: { front_default: '' }})
+  const { data, error, loading } = useFetch<PokemonDataType>(url)
 
-  useEffect(() => {
-    // GET request using fetch inside useEffect React hook
-    const fetchData = async () => {
-      const response = await fetch(url)
-      const data = await response.json()
-      setPokemonData(data)
-      setLoading(false)
-    }
-    
-    fetchData()
-  }, [url]);
+  // extract front_default from data if it exists or return default with empty string
+  const { sprites: { front_default }} = data || { sprites: { front_default: '' } }
 
-  const { sprites: { front_default } } = pokemonData
+  if(error) return (<div>Error</div>)
 
   return (<div className={css.card}>
     {loading

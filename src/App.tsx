@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import Card from './components/card/Card'
 import Dialog from './components/dialog/Dialog'
@@ -6,38 +6,34 @@ import Loading from './components/loading/Loading'
 import PokemonDetails from './components/pokemon-details/PokemonDetails'
 import Search from './components/search/Search'
 
+import useFetch from './hooks/use-fetch/use-fetch'
 import useNetwork from './hooks/use-network/use-network'
 
 import css from './App.module.scss'
+import { POKEMON_LIST_URL } from './constants/pokeapi.const'
 
 type PokemonDataType = {
   name: string,
   url: string,
 }
 
+type PokemonDataListType = {
+  results: Array<PokemonDataType>
+}
+
 function App() {
-  const [loading, setLoading] = useState(true)
-  const [pokemonData, setPokemonData] = useState([])
   const [search, setSearch] = useState('')
   const isOnline = useNetwork()
-
-  useEffect(() => {
-    // GET request using fetch inside useEffect React hook
-    const fetchData = async () => {
-      const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
-      const data = await response.json()
-      setPokemonData(data.results)
-      setLoading(false)
-    }
-    
-    fetchData()
-  }, []);
+  const { data, error, loading } = useFetch<PokemonDataListType>(POKEMON_LIST_URL)
 
   const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value)
   }
 
-  const filteredList = pokemonData
+  // extract results from data if it exists or return empty array
+  const { results } = data || { results: [] }
+
+  const filteredList = results
     .filter((pokemon: PokemonDataType) => pokemon.name.includes(search.toLowerCase()))
     .map((pokemon: PokemonDataType, index) => (
       <Dialog key={index} content={<PokemonDetails name={pokemon.name} url={pokemon.url} />}>
@@ -65,13 +61,21 @@ function App() {
     </div>
   )
 
+  // if error :(
+  if (error) return (
+    <div className={css.error}>
+      <Loading />
+      <p>Oops, something went wrong :(</p>
+    </div>
+  )
+
   // default
   return (
     <>
       <h4 className={css.title}>Pokédex (Kanto - カントー地方)</h4>
 
       <div className={css.content}>
-        {pokemonData.length
+        {results.length
           ? (
             <>
               <Search onChange={onSearchChange} className={css.search} />
