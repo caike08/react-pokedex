@@ -1,9 +1,8 @@
-import {useEffect, useState} from 'react'
-
 import { POKEMON_TYPES } from '../../constants/pokemon-types.const'
 import ImageResolver from '../image-resolver/ImageResolver'
 import Loading from '../loading/Loading'
 import PokemonTypeBadge from '../pokemon-type-badge/PokemonTypeBadge'
+import useFetch from '../../hooks/use-fetch/use-fetch'
 
 import css from './pokemon-details.module.scss'
 
@@ -34,13 +33,14 @@ type PokemonDetailType = {
 }
 
 function PokemonDetails({ name, url }: PokemonDetailsType) {
-  const [loading, setLoading] = useState(true)
-  const [pokemonData, setPokemonData] = useState<PokemonDetailType>({
-    abilities: [{
-      ability: {
-        name: '',
-      },
-    }],
+  const { data, error, loading } = useFetch<PokemonDetailType>(url)
+
+  if (loading) return <Loading />
+
+  if (error) return <div>Error</div>
+
+  const { abilities, base_experience, height, id, types, sprites, weight } = data || {
+    abilities: [],
     base_experience: 0,
     height: 0,
     id: 0,
@@ -48,24 +48,8 @@ function PokemonDetails({ name, url }: PokemonDetailsType) {
     sprites: {
       front_default: '',
     },
-    weight: 0
-  })
-  
-  useEffect(() => {
-    // GET request using fetch inside useEffect React hook
-    const fetchData = async () => {
-      const response = await fetch(url)
-      const data = await response.json()
-      setPokemonData(data)
-      setLoading(false)
-    }
-    
-    fetchData()
-  }, [url]);
-
-  if (loading) return <Loading />
-
-  const { abilities, base_experience, height, id, types, sprites, weight } = pokemonData
+    weight: 0,
+  }
 
   return (
     <div className={css.details}>
