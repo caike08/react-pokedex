@@ -1,39 +1,28 @@
 // based on https://levelup.gitconnected.com/testing-a-custom-react-hook-21ae732228b7
-import { afterAll, describe, test, vi } from 'vitest'
-// import { renderHook } from '@testing-library/react'
-// import useFetch from './use-fetch'
+import { renderHook, waitFor } from '@testing-library/react'
+import { describe, expect, test } from 'vitest'
 
-// type PokemonDataMock = {name: string, url: string}
+import { POKEMON_DETAILS } from '../../constants/pokemon-mock.const'
 
-// const URL = 'https://pokeapi.co/api/v2/pokemon/1/'
+import useFetch from './use-fetch'
 
-// const POKEMON_DATA = {
-//   name: 'bulbasaur',
-//   url: URL,
-// }
+type PokemonDataMock = {name: string, url: string}
+
+const WRONG_URL = 'https://pokeapi.co/api/v2/pokemon/0/'
+const URL = 'https://pokeapi.co/api/v2/pokemon/1/'
+
+const ERROR_MESSAGE = 'Something went wrong'
 
 describe('useFetch', () => {
-  afterAll(() => {
-    vi.resetAllMocks()
+  test.todo('should throw an error', async () => {
+    const { result } = renderHook(() => useFetch<PokemonDataMock>(WRONG_URL))
+
+    await waitFor(() => expect(result.current.error).toBe(ERROR_MESSAGE))
   })
 
-  test.todo('should throw an error', () => {
-    // global.fetch = vi.fn().mockRejectedValue({
-    //   json: vi.fn().mockRejectedValue('something failed')
-    // })
+  test('should return data', async () => {
+    const { result } = renderHook(() => useFetch<PokemonDataMock>(URL))
 
-    // const { result } = renderHook(() => useFetch<PokemonDataMock>(URL))
-
-    // expect(result.current.error).toBe('something failed')
-  })
-
-  test.todo('should return data', () => {
-    // global.fetch = vi.fn().mockReturnValue({
-    //   json: vi.fn().mockRejectedValue(POKEMON_DATA)
-    // })
-
-    // const { result } = renderHook(() => useFetch<PokemonDataMock>(URL))
-
-    // expect(result.current.data).toBe(POKEMON_DATA)
+    await waitFor(() => expect(result.current.data).toStrictEqual(POKEMON_DETAILS))
   })
 })
